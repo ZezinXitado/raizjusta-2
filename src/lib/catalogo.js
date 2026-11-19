@@ -10,6 +10,14 @@ export function listarProdutos() {
   return [...lerProdutosVendedores(), ...demo];
 }
 
+// Um produto está disponível quando não foi marcado como esgotado e tem estoque.
+// Produtos antigos sem o campo `disponivel` contam como disponíveis.
+export function estaDisponivel(produto) {
+  if (!produto) return false;
+  if (produto.disponivel === false) return false;
+  return (produto.estoque ?? 1) > 0;
+}
+
 export function acharProduto(id) {
   return (
     demo.find((p) => p.id === id) || lerProdutosVendedores().find((p) => p.id === id) || null

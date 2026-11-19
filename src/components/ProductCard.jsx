@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Star, MapPin, BadgeCheck, ShoppingCart, Heart, PackageX } from "lucide-react";
-import { produtorDoProduto } from "@/lib/catalogo";
+import { produtorDoProduto, estaDisponivel } from "@/lib/catalogo";
 import { useApp } from "@/lib/AppContext";
 import { Image } from "@/components/ui/image";
 import { useToast } from "@/components/ui/use-toast";
@@ -14,11 +14,12 @@ export default function ProductCard({ product }) {
   const { toast } = useToast();
   const navigate = useNavigate();
   const favorito = ehFavorito(product.id);
+  const disponivel = estaDisponivel(product);
 
   const handleBuy = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (!product.disponivel) return;
+    if (!disponivel) return;
     addToCart(product.id);
     addPontos(product.sustainable ? 150 : 100);
     toast({
@@ -54,8 +55,13 @@ export default function ProductCard({ product }) {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           fittingType="fill"
         />
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-700/90 text-white text-xs font-semibold backdrop-blur">
-          <BadgeCheck size={13} /> Justo {product.fairTradePct}%
+        <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-700/90 text-white text-xs font-semibold backdrop-blur">
+            <BadgeCheck size={13} /> Justo {product.fairTradePct}%
+          </div>
+          <span className="px-2 py-0.5 rounded-full bg-white/90 text-emerald-900 text-[10px] font-bold uppercase tracking-wide backdrop-blur">
+            Demonstrativo
+          </span>
         </div>
         <button
           onClick={handleFavorito}
@@ -64,13 +70,13 @@ export default function ProductCard({ product }) {
         >
           <Heart size={17} className={favorito ? "fill-red-500 text-red-500" : "text-emerald-800"} />
         </button>
-        {!product.disponivel && (
+        {!disponivel && (
           <div className="absolute inset-0 bg-emerald-950/55 flex flex-col items-center justify-center text-white text-center px-3">
             <PackageX size={26} />
             <span className="mt-1 text-xs font-bold uppercase tracking-wide">Indisponível</span>
           </div>
         )}
-        {product.sustainable && product.disponivel && (
+        {product.sustainable && disponivel && (
           <div className="absolute bottom-2.5 left-3 px-2 py-1 rounded-full bg-lime-500/90 text-white text-[11px] font-semibold">
             🌱 Sustentável
           </div>
@@ -95,10 +101,10 @@ export default function ProductCard({ product }) {
           </div>
           <button
             onClick={handleBuy}
-            disabled={!product.disponivel}
+            disabled={!disponivel}
             className="flex items-center gap-1.5 px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-600 disabled:bg-muted disabled:text-muted-foreground text-white text-xs font-semibold transition-colors active:scale-95"
           >
-            <ShoppingCart size={14} /> {product.disponivel ? "Comprar" : "Esgotado"}
+            <ShoppingCart size={14} /> {disponivel ? "Comprar" : "Esgotado"}
           </button>
         </div>
       </div>

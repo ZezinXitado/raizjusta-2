@@ -17,11 +17,8 @@ export default function Orders() {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
-    if (!user) {
-      setOrders([]);
-      return;
-    }
-    setOrders(meusPedidos(user.id));
+    // Convidados também têm histórico: os pedidos ficam sob a chave "convidado".
+    setOrders(meusPedidos(user?.id || "convidado"));
   }, [user]);
 
   if (!orders) {

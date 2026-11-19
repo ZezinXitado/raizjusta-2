@@ -1,198 +1,190 @@
-# RELATÓRIO DE EXTRAÇÃO — RAIZJUSTA (Base44)
+# Relatório de extração - Base44 (raizjusta)
 
-- Arquivos encontrados no editor: 159
-- Copiados com sucesso: 159
+- Arquivos encontrados na árvore: 157
+- Copiados com sucesso: 157
 - Com erro: 0
 - Não copiados: nenhum
-- Verificação: 159 arquivos em disco; total de 572.212 caracteres, idêntico à soma dos tamanhos lidos do editor; nenhum arquivo vazio.
-
-## Método
-Todas as pastas foram expandidas; cada arquivo foi aberto no editor e o conteúdo integral lido do modelo Monaco, e gravado em disco sem alteração. Nada foi modificado, publicado ou implantado no Base44.
+- Arquivos vazios: 0
 
 ## Limitações
-- O editor está em modo somente leitura (edição exige plano pago); não havia opção de exportação nativa testada.
-- Arquivos binários/imagens não aparecem na árvore do editor, logo não foram copiados.
-- A comparação foi por contagem e total de caracteres, não por hash arquivo a arquivo.
-- Dois a três arquivos precisaram de nova tentativa de leitura e foram copiados na segunda passagem.
+- Conteúdo lido dos modelos do editor Monaco (texto integral). O editor é somente leitura (plano gratuito); nada foi modificado nem publicado.
+- Fins de linha podem estar normalizados pelo editor; não há arquivos binários/imagens na árvore de código.
+- A verificação comparou a árvore do Base44 com os caminhos extraídos e checou arquivos vazios/duplicados; não comparou hash de cada arquivo.
+- A pasta base44/ estava recolhida e só foi incluída na segunda passada.
 
-## Estrutura
-```
-raizjusta/
-├── base44/
-│   ├── entities/
-│   │   ├── Order.jsonc
-│   │   └── User.jsonc
-│   └── config.jsonc
-├── src/
-│   ├── api/
-│   │   └── base44Client.js
-│   ├── components/
-│   │   ├── auth/
-│   │   │   ├── AuthShell.jsx
-│   │   │   ├── AvisoModoLocal.jsx
-│   │   │   └── CampoAuth.jsx
-│   │   ├── catalog/
-│   │   │   └── FiltrosCatalogo.jsx
-│   │   ├── perfil/
-│   │   │   └── DadosConta.jsx
-│   │   ├── raizinho/
-│   │   │   ├── actions.js
-│   │   │   ├── engine.js
-│   │   │   ├── expressions.js
-│   │   │   ├── model.js
-│   │   │   ├── modes.js
-│   │   │   ├── particles.js
-│   │   │   └── SpeechBubble.jsx
-│   │   ├── ui/
-│   │   │   ├── accordion.jsx
-│   │   │   ├── alert-dialog.jsx
-│   │   │   ├── alert.jsx
-│   │   │   ├── aspect-ratio.jsx
-│   │   │   ├── avatar.jsx
-│   │   │   ├── badge.jsx
-│   │   │   ├── breadcrumb.jsx
-│   │   │   ├── button.jsx
-│   │   │   ├── calendar.jsx
-│   │   │   ├── card.jsx
-│   │   │   ├── carousel.jsx
-│   │   │   ├── chart.jsx
-│   │   │   ├── checkbox.jsx
-│   │   │   ├── collapsible.jsx
-│   │   │   ├── command.jsx
-│   │   │   ├── context-menu.jsx
-│   │   │   ├── dialog.jsx
-│   │   │   ├── drawer.jsx
-│   │   │   ├── dropdown-menu.jsx
-│   │   │   ├── form.jsx
-│   │   │   ├── hover-card.jsx
-│   │   │   ├── image-helpers.js
-│   │   │   ├── image.jsx
-│   │   │   ├── input-otp.jsx
-│   │   │   ├── input.jsx
-│   │   │   ├── label.jsx
-│   │   │   ├── menubar.jsx
-│   │   │   ├── navigation-menu.jsx
-│   │   │   ├── pagination.jsx
-│   │   │   ├── popover.jsx
-│   │   │   ├── progress.jsx
-│   │   │   ├── radio-group.jsx
-│   │   │   ├── resizable.jsx
-│   │   │   ├── responsive-image.jsx
-│   │   │   ├── scroll-area.jsx
-│   │   │   ├── select.jsx
-│   │   │   ├── separator.jsx
-│   │   │   ├── sheet.jsx
-│   │   │   ├── sidebar.jsx
-│   │   │   ├── skeleton.jsx
-│   │   │   ├── slider.jsx
-│   │   │   ├── sonner.jsx
-│   │   │   ├── switch.jsx
-│   │   │   ├── table.jsx
-│   │   │   ├── tabs.jsx
-│   │   │   ├── textarea.jsx
-│   │   │   ├── toast.jsx
-│   │   │   ├── toaster.jsx
-│   │   │   ├── toggle-group.jsx
-│   │   │   ├── toggle.jsx
-│   │   │   ├── tooltip.jsx
-│   │   │   ├── use-responsive-image.jsx
-│   │   │   └── use-toast.jsx
-│   │   ├── vendedor/
-│   │   │   ├── PedidosRecebidos.jsx
-│   │   │   └── ProdutoForm.jsx
-│   │   ├── AuthLayout.jsx
-│   │   ├── CategoryPill.jsx
-│   │   ├── GoogleIcon.jsx
-│   │   ├── GuardaConta.jsx
-│   │   ├── ImpactCounter.jsx
-│   │   ├── Layout.jsx
-│   │   ├── Logo.jsx
-│   │   ├── MascotPanel.jsx
-│   │   ├── MfaFlow.jsx
-│   │   ├── MfaManage.jsx
-│   │   ├── MfaMethodSetup.jsx
-│   │   ├── MfaParts.jsx
-│   │   ├── Navbar.jsx
-│   │   ├── PriceBreakdown.jsx
-│   │   ├── ProductCard.jsx
-│   │   ├── ProtectedRoute.jsx
-│   │   ├── QRPassport.jsx
-│   │   ├── RaizinhoCompanion.jsx
-│   │   ├── RaizinhoMascot.jsx
-│   │   ├── ScrollToTop.jsx
-│   │   └── UserNotRegisteredError.jsx
-│   ├── data/
-│   │   ├── catalogoCompleto.js
-│   │   ├── estados.js
-│   │   └── mockData.js
-│   ├── hooks/
-│   │   ├── use-mobile.jsx
-│   │   └── use-size.jsx
-│   ├── lib/
-│   │   ├── services/
-│   │   │   ├── auth.js
-│   │   │   └── firebase.js
-│   │   ├── store/
-│   │   │   ├── authStore.js
-│   │   │   ├── orders.js
-│   │   │   ├── sellerProducts.js
-│   │   │   └── storage.js
-│   │   ├── app-params.js
-│   │   ├── AppContext.jsx
-│   │   ├── AuthContext.jsx
-│   │   ├── authMfa.js
-│   │   ├── authMfaFlow.js
-│   │   ├── authReturnTo.js
-│   │   ├── catalogo.js
-│   │   ├── ContaContext.jsx
-│   │   ├── PageNotFound.jsx
-│   │   ├── query-client.js
-│   │   ├── raizinhoBus.js
-│   │   └── utils.js
-│   ├── pages/
-│   │   ├── Acesso.jsx
-│   │   ├── Cart.jsx
-│   │   ├── CriarConta.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Educational.jsx
-│   │   ├── Entrar.jsx
-│   │   ├── Favoritos.jsx
-│   │   ├── ForgotPassword.jsx
-│   │   ├── GuiaExportacao.jsx
-│   │   ├── Home.jsx
-│   │   ├── Impact.jsx
-│   │   ├── Login.jsx
-│   │   ├── MapPage.jsx
-│   │   ├── Mfa.jsx
-│   │   ├── NaoEncontrado.jsx
-│   │   ├── OAuthConsent.jsx
-│   │   ├── Orders.jsx
-│   │   ├── PainelVendedor.jsx
-│   │   ├── Passport.jsx
-│   │   ├── Producer.jsx
-│   │   ├── ProducerDashboard.jsx
-│   │   ├── Producers.jsx
-│   │   ├── ProductDetail.jsx
-│   │   ├── Products.jsx
-│   │   ├── Profile.jsx
-│   │   ├── RecuperarSenha.jsx
-│   │   ├── Register.jsx
-│   │   └── ResetPassword.jsx
-│   ├── utils/
-│   │   └── index.ts
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .gitignore
-├── AGENTS.md
-├── CLAUDE.md
-├── components.json
-├── eslint.config.js
-├── index.html
-├── jsconfig.json
-├── package.json
-├── postcss.config.js
-├── README.md
-├── tailwind.config.js
-└── vite.config.js
-```
+## Diretórios
+base44
+base44\entities
+src
+src\components
+src\components\mapa
+src\components\perfil
+src\components\raizinho
+src\components\ui
+src\components\vendedor
+src\data
+src\hooks
+src\lib
+src\lib\services
+src\lib\store
+src\pages
+src\utils
+
+## Arquivos
+.gitignore
+AGENTS.md
+base44\config.jsonc
+base44\entities\Order.jsonc
+base44\entities\User.jsonc
+CLAUDE.md
+components.json
+eslint.config.js
+index.html
+jsconfig.json
+package.json
+postcss.config.js
+README.md
+src\App.jsx
+src\components\AuthLayout.jsx
+src\components\CategoryPill.jsx
+src\components\GoogleIcon.jsx
+src\components\GuardaConta.jsx
+src\components\ImpactCounter.jsx
+src\components\Layout.jsx
+src\components\Logo.jsx
+src\components\mapa\MapaProdutores.jsx
+src\components\MascotPanel.jsx
+src\components\MfaFlow.jsx
+src\components\MfaManage.jsx
+src\components\MfaMethodSetup.jsx
+src\components\MfaParts.jsx
+src\components\Navbar.jsx
+src\components\perfil\DadosConta.jsx
+src\components\PriceBreakdown.jsx
+src\components\ProductCard.jsx
+src\components\ProtectedRoute.jsx
+src\components\QRPassport.jsx
+src\components\raizinho\actions.js
+src\components\raizinho\engine.js
+src\components\raizinho\expressions.js
+src\components\raizinho\model.js
+src\components\raizinho\modes.js
+src\components\raizinho\particles.js
+src\components\raizinho\SpeechBubble.jsx
+src\components\RaizinhoCompanion.jsx
+src\components\RaizinhoMascot.jsx
+src\components\ScrollToTop.jsx
+src\components\ui\accordion.jsx
+src\components\ui\alert.jsx
+src\components\ui\alert-dialog.jsx
+src\components\ui\aspect-ratio.jsx
+src\components\ui\avatar.jsx
+src\components\ui\badge.jsx
+src\components\ui\breadcrumb.jsx
+src\components\ui\button.jsx
+src\components\ui\calendar.jsx
+src\components\ui\card.jsx
+src\components\ui\carousel.jsx
+src\components\ui\chart.jsx
+src\components\ui\checkbox.jsx
+src\components\ui\collapsible.jsx
+src\components\ui\command.jsx
+src\components\ui\context-menu.jsx
+src\components\ui\dialog.jsx
+src\components\ui\drawer.jsx
+src\components\ui\dropdown-menu.jsx
+src\components\ui\form.jsx
+src\components\ui\hover-card.jsx
+src\components\ui\image.jsx
+src\components\ui\image-helpers.js
+src\components\ui\input.jsx
+src\components\ui\input-otp.jsx
+src\components\ui\label.jsx
+src\components\ui\menubar.jsx
+src\components\ui\navigation-menu.jsx
+src\components\ui\pagination.jsx
+src\components\ui\popover.jsx
+src\components\ui\progress.jsx
+src\components\ui\radio-group.jsx
+src\components\ui\resizable.jsx
+src\components\ui\responsive-image.jsx
+src\components\ui\scroll-area.jsx
+src\components\ui\select.jsx
+src\components\ui\separator.jsx
+src\components\ui\sheet.jsx
+src\components\ui\sidebar.jsx
+src\components\ui\skeleton.jsx
+src\components\ui\slider.jsx
+src\components\ui\sonner.jsx
+src\components\ui\switch.jsx
+src\components\ui\table.jsx
+src\components\ui\tabs.jsx
+src\components\ui\textarea.jsx
+src\components\ui\toast.jsx
+src\components\ui\toaster.jsx
+src\components\ui\toggle.jsx
+src\components\ui\toggle-group.jsx
+src\components\ui\tooltip.jsx
+src\components\ui\use-responsive-image.jsx
+src\components\ui\use-toast.jsx
+src\components\UserNotRegisteredError.jsx
+src\components\vendedor\PedidosRecebidos.jsx
+src\components\vendedor\ProdutoForm.jsx
+src\data\catalogoCompleto.js
+src\data\coordenadasProdutores.js
+src\data\estados.js
+src\data\mockData.js
+src\hooks\use-mobile.jsx
+src\hooks\use-size.jsx
+src\index.css
+src\lib\AppContext.jsx
+src\lib\app-params.js
+src\lib\AuthContext.jsx
+src\lib\authMfa.js
+src\lib\authMfaFlow.js
+src\lib\authReturnTo.js
+src\lib\catalogo.js
+src\lib\ContaContext.jsx
+src\lib\mapConfig.js
+src\lib\PageNotFound.jsx
+src\lib\query-client.js
+src\lib\raizinhoBus.js
+src\lib\services\auth.js
+src\lib\services\firebase.js
+src\lib\store\authStore.js
+src\lib\store\orders.js
+src\lib\store\sellerProducts.js
+src\lib\store\storage.js
+src\lib\utils.js
+src\main.jsx
+src\pages\Acesso.jsx
+src\pages\Cart.jsx
+src\pages\CriarConta.jsx
+src\pages\Dashboard.jsx
+src\pages\Educational.jsx
+src\pages\Entrar.jsx
+src\pages\Favoritos.jsx
+src\pages\ForgotPassword.jsx
+src\pages\GuiaExportacao.jsx
+src\pages\Home.jsx
+src\pages\Impact.jsx
+src\pages\Login.jsx
+src\pages\MapPage.jsx
+src\pages\Mfa.jsx
+src\pages\NaoEncontrado.jsx
+src\pages\OAuthConsent.jsx
+src\pages\Orders.jsx
+src\pages\PainelVendedor.jsx
+src\pages\Passport.jsx
+src\pages\Producer.jsx
+src\pages\ProducerDashboard.jsx
+src\pages\Producers.jsx
+src\pages\ProductDetail.jsx
+src\pages\Products.jsx
+src\pages\Profile.jsx
+src\pages\RecuperarSenha.jsx
+src\pages\Register.jsx
+src\pages\ResetPassword.jsx
+src\utils\index.ts
+tailwind.config.js
+vite.config.js

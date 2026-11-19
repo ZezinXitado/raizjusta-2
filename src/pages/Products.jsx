@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Search, SlidersHorizontal, Info } from "lucide-react";
-import { listarProdutos, estadosDisponiveis } from "@/lib/catalogo";
+import { listarProdutos, estadosDisponiveis, estaDisponivel } from "@/lib/catalogo";
 import { categories } from "@/data/mockData";
 import ProductCard from "@/components/ProductCard";
 import FiltrosCatalogo, { FAIXAS_PRECO } from "@/components/catalog/FiltrosCatalogo";
@@ -51,7 +51,7 @@ export default function Products() {
       if (categoria !== "todas" && p.category !== categoria) return false;
       if (filtros.estado !== "todos" && p.state !== filtros.estado) return false;
       if (filtros.cidade !== "todas" && p.city !== filtros.cidade) return false;
-      if (filtros.disponibilidade === "disponiveis" && !p.disponivel) return false;
+      if (filtros.disponibilidade === "disponiveis" && !estaDisponivel(p)) return false;
       if (p.price < (faixa.min ?? 0) || p.price > (faixa.max ?? Infinity)) return false;
       if (busca) {
         const alvo = `${p.name} ${p.city} ${p.state} ${p.description || ""}`.toLowerCase();

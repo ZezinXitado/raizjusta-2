@@ -54,11 +54,11 @@ export function ContaProvider({ children }) {
   const logout = useCallback(async (redirecionar = true) => {
     await auth.sair();
     setUser(null);
-    if (redirecionar) window.location.href = `${import.meta.env.BASE_URL}#/acesso`;
+    if (redirecionar) window.location.href = "/acesso";
   }, []);
 
   const navigateToLogin = useCallback(() => {
-    window.location.href = `${import.meta.env.BASE_URL}#/acesso`;
+    window.location.href = "/acesso";
   }, []);
 
   const isAuthenticated = Boolean(user) && user.tipo !== "convidado";

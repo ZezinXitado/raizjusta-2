@@ -15,7 +15,7 @@ export function todosPedidos() {
   return ler(TODOS, []);
 }
 
-export function salvarPedido(uid, pedido) {
+export function salvarPedido(uid, pedido, { indexar = true } = {}) {
   const novo = {
     id: idAleatorio("ped"),
     criadoEm: new Date().toISOString(),
@@ -25,7 +25,8 @@ export function salvarPedido(uid, pedido) {
   };
   gravar(collection(uid), [novo, ...meusPedidos(uid)]);
   // Índice global: permite que o vendedor veja os pedidos dos produtos dele.
-  gravar(TODOS, [novo, ...todosPedidos()]);
+  // Pedidos de convidado são apenas demonstração e não vão para o painel.
+  if (indexar) gravar(TODOS, [novo, ...todosPedidos()]);
   return novo;
 }
 

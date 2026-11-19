@@ -495,12 +495,25 @@ const produtosOriginais = [
 // Catálogo completo: produtos do protótipo original + catálogo da agricultura familiar.
 const produtoresPorId = Object.fromEntries(producers.map((p) => [p.id, p]));
 
+// Estoque ilustrativo: produtos demonstrativos têm estoque positivo para
+// permitir a simulação de compra. Só fica zerado quando o item é marcado
+// explicitamente como esgotado (disponivel: false).
+const estoqueIlustrativo = (produto, indice) =>
+  produto.estoque ?? (produto.disponivel === false ? 0 : 20 + (indice % 15));
+
 export const products = [
-  ...produtosOriginais,
-  ...produtosFamiliares.map((p) => ({
+  ...produtosOriginais.map((p, indice) => ({
+    ...p,
+    disponivel: p.disponivel ?? true,
+    estoque: estoqueIlustrativo(p, indice),
+    demo: true,
+  })),
+  ...produtosFamiliares.map((p, indice) => ({
     ...p,
     city: p.city || produtoresPorId[p.producerId]?.city || "—",
     state: p.state || produtoresPorId[p.producerId]?.state || "—",
+    disponivel: p.disponivel ?? true,
+    estoque: estoqueIlustrativo(p, indice),
   })),
 ];
 

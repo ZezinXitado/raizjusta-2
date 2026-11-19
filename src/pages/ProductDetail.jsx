@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Star, MapPin, BadgeCheck, ShoppingCart, QrCode, Sprout, User, Truck, Heart } from "lucide-react";
-import { acharProduto, acharProdutor, produtosRelacionados } from "@/lib/catalogo";
+import { acharProduto, acharProdutor, produtosRelacionados, estaDisponivel } from "@/lib/catalogo";
 import ProductCard from "@/components/ProductCard";
 import { useApp } from "@/lib/AppContext";
 import { useToast } from "@/components/ui/use-toast";
@@ -33,8 +33,10 @@ export default function ProductDetail() {
   const producer = acharProdutor(product.producerId);
   const favorito = ehFavorito(product.id);
   const relacionados = produtosRelacionados(product);
+  const disponivel = estaDisponivel(product);
 
   const handleBuy = () => {
+    if (!disponivel) return;
     addToCart(product.id);
     addPontos(product.sustainable ? 150 : 100);
     toast({ title: `${product.name} adicionado ao carrinho`, description: `+${product.sustainable ? 150 : 100} pontos` });
@@ -119,17 +121,22 @@ export default function ProductDetail() {
           <div className="mt-6 flex items-center gap-2 flex-wrap">
             <span className="text-3xl font-extrabold text-emerald-800">R$ {product.price.toFixed(2).replace(".", ",")}</span>
             <span className="text-sm text-muted-foreground">/ {product.unidade || "unidade"}</span>
-            <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${product.disponivel ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-700"}`}>
-              {product.disponivel ? "Disponível" : "Indisponível"}
+            <span className={`px-2.5 py-1 rounded-full text-xs font-semibold ${disponivel ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-700"}`}>
+              {disponivel ? "Disponível" : "Indisponível"}
             </span>
           </div>
+          {disponivel && (
+            <p className="mt-1 text-xs text-muted-foreground">
+              Estoque demonstrativo: {product.estoque ?? 20} {product.unidade || "unidade"}(s) — nenhum item é real.
+            </p>
+          )}
           <div className="mt-3 flex items-center gap-3">
             <button
               onClick={handleBuy}
-              disabled={!product.disponivel}
+              disabled={!disponivel}
               className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 disabled:bg-muted disabled:text-muted-foreground text-white font-semibold transition-colors active:scale-95"
             >
-              <ShoppingCart size={18} /> {product.disponivel ? "Adicionar ao carrinho" : "Produto indisponível"}
+              <ShoppingCart size={18} /> {disponivel ? "Adicionar ao carrinho" : "Produto indisponível"}
             </button>
             <button
               onClick={handleFavorito}
