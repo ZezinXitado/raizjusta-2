@@ -1,0 +1,11 @@
+RaizJusta 2 - publicacao GitHub Pages
+
+1. Crie um repositório PUBLICO chamado raizjusta-2 no GitHub.
+2. Extraia este ZIP e envie O CONTEUDO da pasta raizjusta-2-publicacao para a RAIZ do repositório (package.json deve ficar na raiz).
+3. Em Settings > Pages > Build and deployment > Source escolha GitHub Actions.
+4. Em Actions verifique o workflow "Publicar RaizJusta 2".
+5. Endereço esperado: https://zezinxitado.github.io/raizjusta-2/
+
+O catálogo e modo convidado usam dados de demonstracao. Login real exige configurar Firebase.
+O codigo ainda contem dependencias do Base44; a compilacao e o funcionamento final NAO foram verificados.
+Se mudar o nome do repositorio, altere base em vite.config.js.
